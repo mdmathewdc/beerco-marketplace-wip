@@ -1,5 +1,6 @@
 $(function() {
     console.log("Function has been called!");
+
     $("#add-product").click(function()   {
 
         var productName = $("#product-name").val();
@@ -10,6 +11,7 @@ $(function() {
         addProduct(productName,productDescription,vendorName,productCategory);
 
     });
+
 
     function addProduct(productName,productDescription,vendorName,productCategory) {
 
