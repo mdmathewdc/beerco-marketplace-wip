@@ -1,5 +1,5 @@
 $(function() {
-    console.log("Fuction has been called!");
+    console.log("Function has been called!");
     $("#add-product").click(function()   {
 
         var productName = $("#product-name").val();
@@ -12,6 +12,7 @@ $(function() {
     });
 
     function addProduct(productName,productDescription,vendorName,productCategory) {
+
         console.log("Add product function...");
         var settings = {
             "url": "https://5e0c9d0ee789975147ebd70d5d71cb1f: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@beerco-pty-ltd.myshopify.com/admin/api/2020-10/products.json",
