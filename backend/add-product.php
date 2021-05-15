@@ -14,10 +14,10 @@ $baseUrl = "https://".$apiKey .":". $pwd ."@beerco-pty-ltd.myshopify.com";
 
 
 $product =
-    array('title' => 'My New Product',
-        'body_html' => 'My New Product Description',
-        'vendor'=> 'My Product Vendor',
-        'product_type'=> 'My Product Type',
+    array('title' => $productName,
+        'body_html' => $productDescription,
+        'vendor'=> $vendorName,
+        'product_type'=> $productCategory,
         'variants' => array(
             array('option1' => 'Default',
                 'price' => '100.00',
@@ -27,7 +27,8 @@ $product =
                 'taxable' => true,
                 'requires_shipping' => true
             )
-        )
+        ),
+        'status' => 'draft'
     );
 
 $ch = curl_init($baseUrl.'/admin/products.json'); //set the url
