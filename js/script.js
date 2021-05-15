@@ -1,5 +1,5 @@
 $(function() {
-    console.log("Function has been called!");
+    console.log("Script.js has been called!");
 
     $("#add-product").click(function()   {
 
@@ -7,7 +7,7 @@ $(function() {
         var productDescription = $("#product-description").val();
         var vendorName = $("#vendor-name").val();
         var productCategory = $("#product-category").val();
-        console.log("Product name: " + productName);
+        //console.log("Product name: " + productName);
         addProduct(productName,productDescription,vendorName,productCategory);
 
     });
@@ -18,7 +18,11 @@ $(function() {
       $.ajax({
         type: "POST",
         url: 'backend/add-product.php',
-        data: {name: 'John'},
+        data: {'productName': productName, 
+               'productDescription': productDescription, 
+               'vendorName': vendorName,
+                'productCategory': productCategory
+              },
         success: function(data){
           console.log("Response :" + data);
         },
