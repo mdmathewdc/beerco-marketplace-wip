@@ -7,8 +7,9 @@ $(function() {
         var productDescription = $("#product-description").val();
         var vendorName = $("#vendor-name").val();
         var productCategory = $("#product-category").val();
-        //console.log("Product name: " + productName);
-        addProduct(productName,productDescription,vendorName,productCategory);
+        if(productName != "") {
+          addProduct(productName,productDescription,vendorName,productCategory);
+        }
 
     });
 
