@@ -10,7 +10,7 @@ $(function() {
         if(productName != "") {
           addProduct(productName,productDescription,vendorName,productCategory);
         }
-          
+
     });
 
 
@@ -25,7 +25,7 @@ $(function() {
                 'productCategory': productCategory
               },
         success: function(data){
-          console.log("Response :" + data);
+          console.log(JSON.parse(data));
         },
         error: function(xhr, status, error){
           console.error(xhr);
