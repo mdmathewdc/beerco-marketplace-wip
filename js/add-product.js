@@ -10,7 +10,7 @@ $(function() {
         if(productName != "") {
           addProduct(productName,productDescription,vendorName,productCategory);
         }
-
+          
     });
 
 
