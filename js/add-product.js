@@ -1,5 +1,6 @@
 $(function() {
 
+
     console.log("Script.js has been called!");
 
     $("#add-product").click(function()   {
