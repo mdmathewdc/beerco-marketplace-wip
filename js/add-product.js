@@ -1,7 +1,9 @@
 $(function() {
 
-    $("div#myId").dropzone({ url: "/file/post" });
-
+  $("div#myDropzone").dropzone({ url: "/upload-product-image.php" },
+  function() {
+      console.log("Hello");
+  });
     console.log("Script.js has been called!");
 
     $("#add-product").click(function()   {
