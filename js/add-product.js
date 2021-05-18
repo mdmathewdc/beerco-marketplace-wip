@@ -1,5 +1,6 @@
 $(function() {
 
+    $("div#myId").dropzone({ url: "/file/post" });
 
     console.log("Script.js has been called!");
 
