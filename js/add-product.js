@@ -23,14 +23,15 @@ $(function() {
      
       $.ajax({
         type: "POST",
-        url: 'backend/add-product.php',
+        url: 'add-product.php',
         data: {'productName': productName, 
                'productDescription': productDescription, 
                'vendorName': vendorName,
                'productCategory': productCategory
               },
         success: function(data){
-          console.log(JSON.parse(data));
+          //console.log(JSON.parse(data));
+          console.log(data);
           $.toast({
             heading: 'Success',
             text: 'Product has been added!',
