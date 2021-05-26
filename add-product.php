@@ -2,6 +2,39 @@
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 
+$ds          = DIRECTORY_SEPARATOR;  //1
+ 
+$storeFolder = 'img/uploads';   //2
+ 
+if (!empty($_FILES)) {
+     
+    $tempFile = $_FILES['file']['tmp_name'];          //3             
+      
+    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
+     
+    $targetFile =  $targetPath. $_FILES['file']['name'];  //5
+ 
+    move_uploaded_file($tempFile,$targetFile); //6
+
+}
+
+$fileNames = array();
+$base64Data = array();
+
+foreach (new DirectoryIterator(__DIR__ . "/img/uploads") as $file) {
+    if ($file->isFile()) {
+        //print $file->getFilename() . "\n";
+        array_push($fileNames, "img/uploads/".$file->getFilename());
+    }
+  }
+
+foreach ($fileNames as $fileName) {
+    print $fileName . "\n";
+    $image = file_get_contents($fileName);
+    $base64 = base64_encode($image);
+    array_push($base64Data, $base64);
+}
+
 /* Convert image to Base64 */
 
 $image = file_get_contents("img/uploads/11.png");
@@ -39,9 +72,11 @@ $product =
         'status' => 'draft',
         'images' => array(
             array(
-            'filename' => '11.png',
-            'attachment' => $base64
-            )
+            'attachment' => $base64Data[2]
+            ),
+            array(
+            'attachment' => $base64Data[0]
+                )
         )
     );
 
