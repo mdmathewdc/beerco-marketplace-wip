@@ -29,10 +29,16 @@ foreach (new DirectoryIterator(__DIR__ . "/img/uploads") as $file) {
   }
 
 foreach ($fileNames as $fileName) {
-    print $fileName . "\n";
+    //print $fileName . "\n";
     $image = file_get_contents($fileName);
     $base64 = base64_encode($image);
     array_push($base64Data, $base64);
+}
+
+$images = array();
+
+foreach ($base64Data as $base64) {
+    array_push($images, array('attachment' => $base64));
 }
 
 /* Convert image to Base64 */
@@ -54,7 +60,33 @@ $pwd = "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";
 $baseUrl = "https://".$apiKey .":". $pwd ."@beerco-pty-ltd.myshopify.com";
 
 
-$product =
+// $product =
+//     array('title' => $productName,
+//         'body_html' => $productDescription,
+//         'vendor'=> $vendorName,
+//         'product_type'=> $productCategory,
+//         'variants' => array(
+//             array('option1' => 'Default',
+//                 'price' => '100.00',
+//                 'sku' => 'ABC123',
+//                 'inventory_quantity'=> '999',
+//                 'inventory_management' => 'shopify',
+//                 'taxable' => true,
+//                 'requires_shipping' => true
+//             )
+//         ),
+//         'status' => 'draft',
+//         'images' => array(
+//             array(
+//             'attachment' => $base64Data[2]
+//             ),
+//             array(
+//             'attachment' => $base64Data[0]
+//                 )
+//         )
+//     );
+
+    $product =
     array('title' => $productName,
         'body_html' => $productDescription,
         'vendor'=> $vendorName,
@@ -69,16 +101,10 @@ $product =
                 'requires_shipping' => true
             )
         ),
-        'status' => 'draft',
-        'images' => array(
-            array(
-            'attachment' => $base64Data[2]
-            ),
-            array(
-            'attachment' => $base64Data[0]
-                )
-        )
+        'status' => 'draft'
     );
+
+    $product['images'] = $images;
 
 $ch = curl_init($baseUrl.'/admin/products.json'); //set the url
 $data_string = json_encode(array('product'=>$product)); //encode the product as json
@@ -91,5 +117,6 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 ); //specify that this is a JSON call
 echo $server_output = curl_exec ($ch); //get server output if you wish to error handle / debug
 curl_close ($ch); //close the connection
+//echo $data_string;
 
 
